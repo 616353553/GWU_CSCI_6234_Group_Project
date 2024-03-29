@@ -14,6 +14,7 @@ import java.util.Map;
 
 @RestController
 public class PizzaBuilderController {
+    private static final String URL_BASE = "localhost:8080/";
     @Autowired
     private DoughService doughService;
     @Autowired
@@ -42,7 +43,8 @@ public class PizzaBuilderController {
         map.put("sauces", sauceList);
         map.put("sauceIntensities", sauceIntensityList);
         map.put("toppings", toppingList);
-        map.put("urls", Map.of("validateUrl", "/pizzabuilder/validate", "getPriceUrl", "/pizzabuilder/getprice"));
+        map.put("urls", Map.of("validateUrl", URL_BASE + "pizzabuilder/validate",
+                "getPriceUrl", URL_BASE + "pizzabuilder/getprice"));
         return map;
     }
 
