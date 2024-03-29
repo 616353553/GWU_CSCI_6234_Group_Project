@@ -1,6 +1,5 @@
 package com.group8.pizzaOrderSystem.Controller;
 
-import com.group8.pizzaOrderSystem.foundation.entity.*;
 import com.group8.pizzaOrderSystem.foundation.mapper.*;
 import com.group8.pizzaOrderSystem.foundation.model.*;
 import com.group8.pizzaOrderSystem.foundation.service.*;
@@ -14,7 +13,7 @@ import java.util.Map;
 
 @RestController
 public class PizzaBuilderController {
-    private static final String URL_BASE = "localhost:8080/";
+    private static final String DOMAIN = "localhost:8080";
     @Autowired
     private DoughService doughService;
     @Autowired
@@ -31,6 +30,9 @@ public class PizzaBuilderController {
     @GetMapping(value = "/pizzabuilder")
     public Map<String, Object> getSettings() {
         Map<String, Object> map = new HashMap<>();
+        map.put("domain", DOMAIN);
+        map.put("validateUrl", "/pizzabuilder/validate");
+        map.put("getPriceUrl", "/pizzabuilder/getprice");
         List<DoughDTO> doughList = doughService.list().stream().map(DoughMapper::toDTO).toList();
         List<CheeseDTO> cheeseList = cheeseService.list().stream().map(CheeseMapper::toDTO).toList();
         List<CheeseLevelDTO> cheeseLevelList = cheeseLevelService.list().stream().map(CheeseLevelMapper::toDTO).toList();
@@ -43,8 +45,6 @@ public class PizzaBuilderController {
         map.put("sauces", sauceList);
         map.put("sauceIntensities", sauceIntensityList);
         map.put("toppings", toppingList);
-        map.put("urls", Map.of("validateUrl", URL_BASE + "pizzabuilder/validate",
-                "getPriceUrl", URL_BASE + "pizzabuilder/getprice"));
         return map;
     }
 

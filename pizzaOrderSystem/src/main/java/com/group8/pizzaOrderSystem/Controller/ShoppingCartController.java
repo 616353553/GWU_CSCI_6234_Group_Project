@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ShoppingCartController {
-    private static final String URL_BASE = "localhost:8080/";
+    private static final String DOMAIN = "localhost:8080";
     @GetMapping(value = "/cart")
     public String getCart(@CookieValue(value = "cartItems", defaultValue = "") String cartItems) {
         // TODO:

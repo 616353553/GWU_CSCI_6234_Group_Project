@@ -12,7 +12,7 @@ import java.util.*;
 
 @RestController
 public class HomePageController {
-    private static final String URL_BASE = "localhost:8080/";
+    private static final String DOMAIN = "localhost:8080";
     private static final String CUSTOM_PIZZA_NAME = "Custom Pizza";
     @Autowired
     DoughService doughService;
@@ -27,21 +27,19 @@ public class HomePageController {
 
     @GetMapping(value="/home")
     public Map<String, Object> getHomeEntryPoints() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("menuUrl", URL_BASE + "home/menu");
-        return map;
+        return Map.of("domain", DOMAIN, "menuUrl", "/home/menu");
     }
 
     @GetMapping(value="/home/menu")
     public Map<String, Object> getMenu() {
         Map<String, Object> map = new HashMap<>();
-        map.put("signaturePizza", new ArrayList<String>());
+        map.put("domain", DOMAIN);
+        map.put("customPizza", Map.of("pizzaBuilderUrl", "/pizzabuilder"));
         List<PizzaDTO> pizzaDTOList = pizzaService.list().stream()
                 .filter(pizza -> !CUSTOM_PIZZA_NAME.equals(pizza.getName()))
                 .map(PizzaMapper::toDTO)
                 .toList();
         map.put("signaturePizza", pizzaDTOList);
-        map.put("customPizza", Map.of("pizzaBuilderUrl", URL_BASE + "/pizzabuilder"));
         return map;
     }
 
