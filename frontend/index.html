@@ -4,6 +4,32 @@
     </header>
     <body>
         <text>This is the body</text>
+        <div id="response"></div>
+        <script>
+            // Function to make a GET request and handle the response
+            function fetchData() {
+                fetch('http://localhost:8080/home')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Display the entire JSON response
+                        document.getElementById('response').innerHTML = JSON.stringify(data, null, 2);
+
+                        // Access the "menuUrl" key from the JSON response
+                        if (data.menuUrl) {
+                            console.log("Menu URL:", data.menuUrl);
+                            // Do whatever you need with the "menuUrl" value
+                        } else {
+                            console.log("Menu URL not found in the response");
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+
+            // Call the fetchData function when the page loads
+            fetchData();
+        </script>
     </body>
     <footer>
     </footer>
