@@ -23,6 +23,14 @@ public class Dough {
     private final Set<DoughSize> supportedDoughSizes = new HashSet<>();
     private BigDecimal price;
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
     public Long getId() {
         return id;
     }

@@ -27,6 +27,10 @@ public class SauceIntensity {
         return multiplier;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return String.format("[SauceIntensity %d: %s : %sx]", id, name, multiplier.toString());

@@ -43,6 +43,10 @@ public class PizzaDTO {
         this.retailPrice = retailPrice;
     }
 
+    public void setRetailPrice(BigDecimal retailPrice) {
+        this.retailPrice = retailPrice;
+    }
+
     public String getName() {
         return name;
     }
@@ -95,18 +99,18 @@ public class PizzaDTO {
         return retailPrice;
     }
 
-    public BigDecimal getPrice(BigDecimal doughPrice, BigDecimal doughSizeMultiplier, BigDecimal cheesePrice1,
-                               BigDecimal cheeseLevelMultiplier1, BigDecimal cheesePrice2,
-                               BigDecimal cheeseLevelMultiplier2, BigDecimal saucePrice,
-                               BigDecimal sauceIntensityMultiplier, BigDecimal toppingPrice1, BigDecimal toppingPrice2,
-                               BigDecimal toppingPrice3) {
-        BigDecimal doughCost = doughPrice.multiply(doughSizeMultiplier);
-        BigDecimal cheeseCost1 = cheesePrice1.multiply(cheeseLevelMultiplier1);
-        BigDecimal cheeseCost2 = cheesePrice2.multiply(cheeseLevelMultiplier2);
-        BigDecimal sauceCost = saucePrice.multiply(sauceIntensityMultiplier);
-        BigDecimal toppingCost = toppingPrice1.add(toppingPrice2).add(toppingPrice3);
-        return doughCost.add(cheeseCost1).add(cheeseCost2).add(sauceCost).add(toppingCost);
-    }
+//    public BigDecimal getPrice(BigDecimal doughPrice, BigDecimal doughSizeMultiplier, BigDecimal cheesePrice1,
+//                               BigDecimal cheeseLevelMultiplier1, BigDecimal cheesePrice2,
+//                               BigDecimal cheeseLevelMultiplier2, BigDecimal saucePrice,
+//                               BigDecimal sauceIntensityMultiplier, BigDecimal toppingPrice1, BigDecimal toppingPrice2,
+//                               BigDecimal toppingPrice3) {
+//        BigDecimal doughCost = doughPrice.multiply(doughSizeMultiplier);
+//        BigDecimal cheeseCost1 = cheesePrice1.multiply(cheeseLevelMultiplier1);
+//        BigDecimal cheeseCost2 = cheesePrice2.multiply(cheeseLevelMultiplier2);
+//        BigDecimal sauceCost = saucePrice.multiply(sauceIntensityMultiplier);
+//        BigDecimal toppingCost = toppingPrice1.add(toppingPrice2).add(toppingPrice3);
+//        return doughCost.add(cheeseCost1).add(cheeseCost2).add(sauceCost).add(toppingCost);
+//    }
 
     @Override
     public String toString() {

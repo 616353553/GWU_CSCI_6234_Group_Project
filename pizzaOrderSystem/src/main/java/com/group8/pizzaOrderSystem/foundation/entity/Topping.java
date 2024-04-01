@@ -32,6 +32,10 @@ public class Topping {
         return veggie;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return String.format("[Sauce %d: %s - $%s %s]", id, name, price.toString(), veggie ? "veggie": "meat");

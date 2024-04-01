@@ -60,6 +60,10 @@ public class Pizza {
     @Column(name = "retail_price")
     private BigDecimal retailPrice;
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }

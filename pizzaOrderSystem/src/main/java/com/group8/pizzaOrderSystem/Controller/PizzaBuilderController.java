@@ -6,7 +6,6 @@ import com.group8.pizzaOrderSystem.foundation.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +13,9 @@ import java.util.Map;
 @RestController
 public class PizzaBuilderController {
     private static final String DOMAIN = "localhost:8080";
+
+    @Autowired
+    private PizzaService pizzaService;
     @Autowired
     private DoughService doughService;
     @Autowired
@@ -27,12 +29,13 @@ public class PizzaBuilderController {
     @Autowired
     private ToppingService toppingService;
 
-    @GetMapping(value = "/pizzabuilder")
-    public Map<String, Object> getSettings() {
+    @GetMapping(value = "/pizzabuilder/options")
+    public Map<String, Object> getOptions() {
         Map<String, Object> map = new HashMap<>();
         map.put("domain", DOMAIN);
         map.put("validateUrl", "/pizzabuilder/validate");
         map.put("getPriceUrl", "/pizzabuilder/getprice");
+        map.put("shoppingCartUrl", "/cart");
         List<DoughDTO> doughList = doughService.list().stream().map(DoughMapper::toDTO).toList();
         List<CheeseDTO> cheeseList = cheeseService.list().stream().map(CheeseMapper::toDTO).toList();
         List<CheeseLevelDTO> cheeseLevelList = cheeseLevelService.list().stream().map(CheeseLevelMapper::toDTO).toList();
@@ -49,57 +52,13 @@ public class PizzaBuilderController {
     }
 
     @PostMapping(value = "/pizzabuilder/validate")
-    public Boolean validatePizza(@RequestBody PizzaDTO pizza) {
-        // TODO:
-        return true;
+    public Map<String, Object> validatePizza(@RequestBody PizzaDTO pizza) {
+        String errMsg = pizzaService.validatePizza(pizza);
+        return Map.of("valid", errMsg.isBlank(), "errMsg", errMsg);
     }
 
-    @GetMapping(value = "/pizzabuilder/getprice")
-    public BigDecimal getPrice(@RequestBody PizzaDTO pizza) {
-        // TODO:
-        return BigDecimal.ZERO;
+    @PostMapping(value = "/pizzabuilder/getprice")
+    public Map<String, Object> getPrice(@RequestBody PizzaDTO pizza) {
+        return Map.of("price", pizzaService.getPrice(pizza));
     }
-
-
-
-
-
-
-
-
-//    @PutMapping(value = "/pizzabuilder/dough/{name}")
-//    public String setDough(@PathVariable String name) {
-//
-//    }
-//
-//    @PutMapping(value = "/pizzabuilder/doughsize/{name}")
-//    public String setDoughSize(@PathVariable String name) {
-//
-//    }
-//
-//    @PutMapping(value = "/pizzabuilder/cheese/{id}/{name}")
-//    public String setCheese(@PathVariable int id, @PathVariable String name) {
-//
-//    }
-//
-//    @PutMapping(value = "/pizzabuilder/cheeselevel/{id}/{name}")
-//    public String setCheeseLevel(@PathVariable int id, @PathVariable String name) {
-//
-//    }
-//
-//    @PutMapping(value = "/pizzabuilder/sauce/{name}")
-//    public String setSauce(@PathVariable String name) {
-//
-//    }
-//
-//    @PutMapping(value = "/pizzabuilder/sauceintensity/{name}")
-//    public String setSauceIntensity(@PathVariable String name) {
-//
-//    }
-//
-//    @PutMapping(value = "/pizzabuilder/topping/{id}/{name}")
-//    public String setTopping(@PathVariable int id, @PathVariable String name) {
-//
-//    }
-
 }

@@ -27,6 +27,10 @@ public class Sauce {
         return price;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return String.format("[Sauce %d: %s - $%s]", id, name, price.toString());
