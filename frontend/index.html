@@ -6,8 +6,6 @@
     </header>
     <body>
         <button id='cart-button' class="cart-button" onclick="window.location.href = 'cart.html'">Cart (0)</button>
-        <div id="response"></div>
-        <div id="response_1"></div>
         <h3>Signature Pizza</h3>
         <div id="menu-container"></div>
         <h3>Customize Your Own Pizza</h3>
@@ -22,10 +20,9 @@
         <script>
             sendGetRequest('http://localhost:8080/home')
                 .then(data => {
-                    document.getElementById('response').innerHTML = JSON.stringify(data, null, 2)
+                    sessionStorage.setItem('shoppingCartUrl', data['domain'] + data['shoppingCartUrl']);
                     return sendGetRequest(data['domain'] + data['menuUrl']);
                 }).then(data => {
-                    document.getElementById('response_1').innerHTML = JSON.stringify(data, null, 2)
                     let signaturePizza = data['signaturePizza'];
                     let menuTable = document.createElement("table");
                     let numRows = Math.ceil((signaturePizza.length) / 2);
@@ -84,7 +81,7 @@
                         }
                     }
                     document.getElementById('menu-container').appendChild(menuTable);
-                    sessionStorage.setItem('pizzaBuilderOptionUrl', data['domina'] + data['customPizza']['pizzaBuilderOptionUrl']);
+                    sessionStorage.setItem('pizzaBuilderOptionUrl', data['domain'] + data['customPizza']['pizzaBuilderOptionUrl']);
                 }).catch(error => {
                     console.error('Error occurred:', error);
                 });
