@@ -13,7 +13,6 @@ import java.util.*;
 
 @RestController
 public class ShoppingCartController {
-    private static final String DOMAIN = "localhost:8080";
 
     @Autowired
     private ShoppingCartService shoppingCartService;

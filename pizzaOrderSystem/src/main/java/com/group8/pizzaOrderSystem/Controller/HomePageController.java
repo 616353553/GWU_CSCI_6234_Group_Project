@@ -11,7 +11,7 @@ import java.util.*;
 
 @RestController
 public class HomePageController {
-    private static final String DOMAIN = "localhost:8080";
+    private static final String DOMAIN = "http://localhost:8080";
     private static final String CUSTOM_PIZZA_NAME = "Custom Pizza";
     @Autowired
     PizzaService pizzaService;

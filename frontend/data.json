@@ -1,0 +1,68 @@
+{
+    "customPizza": {
+        "pizzaBuilderOptionUrl": "/pizzabuilder/options"
+    },
+    "signaturePizza": [
+        {
+            "name": "ExtravaganZZa",
+            "doughName": "Brooklyn Style Crust",
+            "doughSizeName": "Large",
+            "cheeseName1": "Mozzarella Cheese",
+            "cheeseLevelName1": "Less",
+            "cheeseName2": "Mozzarella Cheese",
+            "cheeseLevelName2": "Less",
+            "sauceName": "Tomato Sauce",
+            "sauceIntensityName": "Normal",
+            "toppingName1": "Philly Steak",
+            "toppingName2": "Banana Peppers",
+            "toppingName3": "Mushrooms",
+            "retailPrice": 12.49
+        },
+        {
+            "name": "MeatZZa",
+            "doughName": "Hand Tossed Crust",
+            "doughSizeName": "Large",
+            "cheeseName1": "Cheddar Cheese",
+            "cheeseLevelName1": "Normal",
+            "cheeseName2": "Cheddar Cheese",
+            "cheeseLevelName2": "Normal",
+            "sauceName": "Honey BBQ Sauce",
+            "sauceIntensityName": "Extra",
+            "toppingName1": "Ham",
+            "toppingName2": "Italian Sausage",
+            "toppingName3": "Premium Chicken",
+            "retailPrice": 18.99
+        },
+        {
+            "name": "Buffalo Chicken",
+            "doughName": "Handmade Pan",
+            "doughSizeName": "Large",
+            "cheeseName1": "Parmesan Cheese",
+            "cheeseLevelName1": "Normal",
+            "cheeseName2": "Gouda Cheese",
+            "cheeseLevelName2": "Normal",
+            "sauceName": "Alfredo Sauce",
+            "sauceIntensityName": "Normal",
+            "toppingName1": "Premium Chicken",
+            "toppingName2": "Jalapeno Peppers",
+            "toppingName3": "None",
+            "retailPrice": 15.99
+        },
+        {
+            "name": "SPINACH & FETA",
+            "doughName": "Gluten Free Crust",
+            "doughSizeName": "Large",
+            "cheeseName1": "Parmesan Cheese",
+            "cheeseLevelName1": "Normal",
+            "cheeseName2": "Gouda Cheese",
+            "cheeseLevelName2": "Normal",
+            "sauceName": "Alfredo Sauce",
+            "sauceIntensityName": "Normal",
+            "toppingName1": "Onions",
+            "toppingName2": "Spinach",
+            "toppingName3": "None",
+            "retailPrice": 10.99
+        }
+    ],
+    "domain": "http://localhost:8080"
+}

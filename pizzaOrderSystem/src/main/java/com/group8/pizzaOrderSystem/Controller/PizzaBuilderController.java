@@ -12,7 +12,7 @@ import java.util.Map;
 
 @RestController
 public class PizzaBuilderController {
-    private static final String DOMAIN = "localhost:8080";
+    private static final String DOMAIN = "http://localhost:8080";
 
     @Autowired
     private PizzaService pizzaService;
