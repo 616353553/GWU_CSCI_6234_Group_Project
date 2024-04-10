@@ -21,7 +21,7 @@ function getCartItems() {
 function getTotal() {
 	let value = getCookie("cartItems");
 	if (value !== null) {
-		value = value..replace(/\+/g, '%20');
+		value = value.replace(/\+/g, '%20');
 		return JSON.parse(decodeURIComponent(value))["total"];
 	}
  	return 0;
