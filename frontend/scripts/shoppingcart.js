@@ -10,16 +10,18 @@ function getCookie(cookieName) {
 }
 
 function getCartItems() {
-	let value = getCookie("cartItems").replace(/\+/g, '%20');
+	let value = getCookie("cartItems");
 	if (value !== null) {
+		value = value.replace(/\+/g, '%20');
 		return JSON.parse(decodeURIComponent(value))["items"];
 	}
 	return [];
 }
 
 function getTotal() {
-	let value = getCookie("cartItems").replace(/\+/g, '%20');
+	let value = getCookie("cartItems");
 	if (value !== null) {
+		value = value..replace(/\+/g, '%20');
 		return JSON.parse(decodeURIComponent(value))["total"];
 	}
  	return 0;
