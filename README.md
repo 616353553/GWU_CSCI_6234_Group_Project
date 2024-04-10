@@ -20,6 +20,6 @@ cd frontend
 python -m SimpleHTTPServer
 ```
 By default, the above command will host a server at localhost:8000. 
-## Test Using Browser of Your Choice
-Open a brower of your choice, and navigate to localhost:8000.
+## Testing with Browser of Your Choice
+Open a brower, and navigate to localhost:8000.
 
