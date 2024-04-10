@@ -16,16 +16,22 @@ public class HomePageController {
     @Autowired
     PizzaService pizzaService;
 
-    @GetMapping(value="/home")
+    @GetMapping(value="/entrypoints")
     public Map<String, Object> getHomeEntryPoints() {
-        return Map.of("domain", DOMAIN, "menuUrl", "/home/menu", "shoppingCartUrl", "/cart");
+        return Map.of("domain", DOMAIN, "menuUrl", "/home/menu",
+                "clearCartUrl", "/cart/clear",
+                "checkoutUrl", "/cart/checkout",
+                "removeItemFromCartUrl", "/cart/remove",
+                "addSignaturePizzaToCartUrl", "/cart/addsignaturepizza",
+                "addCustomPizzaToCartUrl", "/cart/addcustompizza",
+                "pizzaBuilderOptionUrl", "/pizzabuilder/options",
+                "validateCustomPizzaUrl", "/pizzabuilder/validate",
+                "getCustomPizzaPriceUrl", "/pizzabuilder/getprice");
     }
 
     @GetMapping(value="/home/menu")
     public Map<String, Object> getMenu() {
         Map<String, Object> map = new HashMap<>();
-        map.put("domain", DOMAIN);
-        map.put("customPizza", Map.of("pizzaBuilderOptionUrl", "/pizzabuilder/options"));
         List<PizzaDTO> pizzaDTOList = pizzaService.list().stream()
                 .filter(pizza -> !CUSTOM_PIZZA_NAME.equals(pizza.getName()))
                 .map(PizzaMapper::toDTO)

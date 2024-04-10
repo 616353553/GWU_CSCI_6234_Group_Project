@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Service
 public class PizzaService {
-    private static final String CUSTOM_PIZZA = "custom pizza";
+    private static final String CUSTOM_PIZZA = "Custom Pizza";
     private static final String NONE_TOPPING = "None";
 
     @Autowired
@@ -43,7 +43,7 @@ public class PizzaService {
 
     public String validatePizza(PizzaDTO pizza) {
         String errMsg = "";
-        if (!CUSTOM_PIZZA.equals(pizza.getName())) {
+        if (!CUSTOM_PIZZA.equalsIgnoreCase(pizza.getName())) {
             errMsg = "Invalid pizza name [" + pizza.getName() + "]";
         } else if (!doughService.existWithName(pizza.getDoughName())) {
             errMsg = "Unknown dough [" + pizza.getDoughName() + "]";
@@ -74,7 +74,7 @@ public class PizzaService {
     }
 
     public BigDecimal getPrice(PizzaDTO pizza) {
-        if (CUSTOM_PIZZA.equals(pizza.getName())) {
+        if (CUSTOM_PIZZA.equalsIgnoreCase(pizza.getName())) {
             BigDecimal sum = doughService.calculateDoughPrice(pizza.getDoughName(), pizza.getDoughSizeName());
             sum = sum.add(cheeseService.calculateCheesePrice(pizza.getCheeseName1(), pizza.getCheeseLevelName1())
                     .multiply(BigDecimal.valueOf(0.5)));

@@ -1,92 +1,99 @@
 <html>
-    <header>
-        <h1>Pizza Order System</h1>
-        <script src="scripts/requestlib.js", type="text/javascript"></script>
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-    </header>
-    <body>
-        <button id='cart-button' class="cart-button" onclick="window.location.href = 'cart.html'">Cart (0)</button>
-        <h3>Signature Pizza</h3>
-        <div id="menu-container"></div>
-        <h3>Customize Your Own Pizza</h3>
-        <div id="custom-pizza-container">
-            <table>
-                <tr>
-                    <td><button onclick="window.location.href = 'pizzabuilder.html'">Build pizza</button></td>
-                </tr>
-            </table>
+<header>
+    <script src="scripts/requestlib.js" , type="text/javascript"></script>
+    <script src="scripts/shoppingcart.js" , type="text/javascript"></script>
+    <script src="scripts/tablehelper.js" , type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</header>
+
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <a href="/" class="logo-link">
+                <img src="images/logo.png" alt="Logo" class="logo" width="50" height="50">
+            </a>
         </div>
+        <h1 class="title">Pizza Order System</h1>
+    </header>
+
+    <button id='cart-button' class="cart-button" onclick="window.location.href='cart.html'">Cart (0)</button>
+    <h3>Signature Pizza</h3>
+    <div id="menu-container">
+        <table id="pizza-menu-table"></table>
+    </div>
+    <h3>Customize Your Own Pizza</h3>
+    <div id="custom-pizza-container">
+        <table>
+            <tr>
+                <td><button onclick="window.location.href = 'pizzabuilder.html'">Build pizza</button></td>
+            </tr>
         </table>
-        <script>
-            sendGetRequest('http://localhost:8080/home')
+    </div>
+
+    <script>
+        function loadCartButton() {
+            document.getElementById('cart-button').textContent = `Cart (${getCartItems().length})`;
+        }
+
+        function loadMenu() {
+            loadCartButton();
+            sendGetRequest('http://localhost:8080/entrypoints')
                 .then(data => {
-                    sessionStorage.setItem('shoppingCartUrl', data['domain'] + data['shoppingCartUrl']);
-                    return sendGetRequest(data['domain'] + data['menuUrl']);
+                    let domain = data.domain;
+                    sessionStorage.setItem('clearCartUrl', domain + data['clearCartUrl']);
+                    sessionStorage.setItem('checkoutUrl', domain + data['checkoutUrl']);
+                    sessionStorage.setItem('removeItemFromCartUrl', domain + data['removeItemFromCartUrl']);
+                    sessionStorage.setItem('addSignaturePizzaToCartUrl', domain + data['addSignaturePizzaToCartUrl']);
+                    sessionStorage.setItem('addCustomPizzaToCartUrl', domain + data['addCustomPizzaToCartUrl']);
+                    sessionStorage.setItem('pizzaBuilderOptionUrl', domain + data['pizzaBuilderOptionUrl']);
+                    sessionStorage.setItem('validateCustomPizzaUrl', domain + data['validateCustomPizzaUrl']);
+                    sessionStorage.setItem('getCustomPizzaPriceUrl', domain + data['getCustomPizzaPriceUrl']);
+                    return sendGetRequest(domain + data['menuUrl']);
                 }).then(data => {
-                    let signaturePizza = data['signaturePizza'];
-                    let menuTable = document.createElement("table");
-                    let numRows = Math.ceil((signaturePizza.length) / 2);
-                    for (let i = 0; i < numRows; i++) {
-                        let row = menuTable.insertRow();
-                        for (let j = 0; j < 2; j++) {
-                            let index = 2 * i + j;
-                            let cell = row.insertCell();
-                            if (index < signaturePizza.length) {
-                                let nameSpan = document.createElement('span');
-                                nameSpan.textContent = signaturePizza[index]["name"];
-                                cell.appendChild(nameSpan);
-                                cell.appendChild(document.createElement('br'));
-
-                                let priceSpan = document.createElement('span');
-                                priceSpan.textContent = `$${signaturePizza[index]["retailPrice"]}`;
-                                cell.appendChild(priceSpan);
-                                cell.appendChild(document.createElement('br'));
-
-                                let doughSpan = document.createElement('span');
-                                doughSpan.textContent = `${signaturePizza[index]["doughSizeName"]} ${signaturePizza[index]["doughName"]}`;
-                                cell.appendChild(doughSpan);
-                                cell.appendChild(document.createElement('br'));
-
-                                let cheeseSpan = document.createElement('span');
-                                if (signaturePizza[index]["cheeseLevelName1"] != signaturePizza[index]["cheeseLevelName2"] 
-                                    || signaturePizza[index]["cheeseName1"] != signaturePizza[index]["cheeseName2"]) {
-                                    cheeseSpan.textContent = `${signaturePizza[index]["cheeseLevelName1"]} ${signaturePizza[index]["cheeseName1"]} & ${signaturePizza[index]["cheeseLevelName2"]} ${signaturePizza[index]["cheeseName2"]}`;
-                                } else {
-                                    cheeseSpan.textContent = `${signaturePizza[index]["cheeseLevelName1"]} ${signaturePizza[index]["cheeseName1"]}`;
-                                }
-                                cell.appendChild(cheeseSpan);
-                                cell.appendChild(document.createElement('br'));
-
-                                let sauceSpan = document.createElement('span');
-                                sauceSpan.textContent = `${signaturePizza[index]["sauceIntensityName"]} ${signaturePizza[index]["sauceName"]}`;
-                                cell.appendChild(sauceSpan);
-                                cell.appendChild(document.createElement('br'));
-
-                                let toppingArr = [];
-                                if (signaturePizza[index]["toppingName1"] != "None") {
-                                    toppingArr.push(signaturePizza[index]["toppingName1"]);
-                                }
-                                if (signaturePizza[index]["toppingName2"] != "None") {
-                                    toppingArr.push(signaturePizza[index]["toppingName2"]);
-                                }
-                                if (signaturePizza[index]["toppingName3"] != "None") {
-                                    toppingArr.push(signaturePizza[index]["toppingName3"]);
-                                }
-                                console.log(toppingArr.length);
-                                let toppingSpan = document.createElement('span');
-                                toppingSpan.textContent = toppingArr.join(" & ");
-                                cell.appendChild(toppingSpan);
-                                cell.appendChild(document.createElement('br'));
-                            }
-                        }
-                    }
-                    document.getElementById('menu-container').appendChild(menuTable);
-                    sessionStorage.setItem('pizzaBuilderOptionUrl', data['domain'] + data['customPizza']['pizzaBuilderOptionUrl']);
+                    loadSignaturePizzaMenu(data['signaturePizza']);
                 }).catch(error => {
                     console.error('Error occurred:', error);
                 });
-        </script>
-    </body>
-    <footer>
-    </footer>
+        }
+
+        function loadSignaturePizzaMenu(data) {
+            let menuTable = document.getElementById('pizza-menu-table');
+            menuTable.innerHTML = '';
+            let numRows = Math.ceil((data.length) / 2);
+            for (let i = 0; i < numRows; i++) {
+                let row = menuTable.insertRow();
+                for (let j = 0; j < 2; j++) {
+                    let index = 2 * i + j;
+                    if (index < data.length) {
+                        let cell = createTableCell(data[index]);
+                        let addToCartButton = document.createElement("button");
+                        addToCartButton.textContent = "Add to cart";
+                        addToCartButton.setAttribute("pizza-name", data[index]["name"]);
+                        addToCartButton.addEventListener("click", function () {
+                            addSignaturePizzaToCart(this);
+                        });
+                        cell.appendChild(addToCartButton);
+                        row.appendChild(cell);
+                    }
+                }
+            }
+        }
+
+        function addSignaturePizzaToCart(button) {
+            let pizzaName = button.getAttribute("pizza-name");
+            sendPostRequest(sessionStorage.getItem('addSignaturePizzaToCartUrl'), { "signaturePizzaName": pizzaName })
+                .then(data => {
+                    loadCartButton();
+                })
+                .catch(error => {
+                    console.error('Error occurred:', error);
+                });
+        }
+
+        window.onload = loadMenu();
+    </script>
+</body>
+<footer>
+</footer>
+
 </html>

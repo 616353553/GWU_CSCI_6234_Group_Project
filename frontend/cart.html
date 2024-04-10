@@ -1,5 +1,111 @@
 <html>
-    <header>
-        <h1>Shopping cart</h1>
+
+<head>
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="scripts/requestlib.js" , type="text/javascript"></script>
+    <script src="scripts/shoppingcart.js" , type="text/javascript"></script>
+    <script src="scripts/tablehelper.js" , type="text/javascript"></script>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <a href="/" class="logo-link">
+                <img src="images/logo.png" alt="Logo" class="logo" width="50" height="50">
+            </a>
+        </div>
+        <h1 class="title">Shopping Cart</h1>
     </header>
+    <main>
+        <div id="cart-items"></div>
+        <p id="totalLabel" class="total-label">Total Cost: $0.00</p>
+        <button onclick="checkout()">Checkout</button>
+        <button onclick="clearCart()">Clear Cart</button>
+    </main>
+    <script>
+        function loadPriceLable() {
+            let total = getTotal().toFixed(2);
+            document.getElementById('totalLabel').textContent = `Total Cost: $${total}`
+        }
+
+        function loadCartItems() {
+            var container = document.getElementById('cart-items');
+            container.innerHTML = '';
+            let items = getCartItems();
+            if (items.length > 0) {
+                let table = document.createElement('table');
+                for (let i = 0; i < items.length; i++) {
+                    let item = items[i];
+                    let row = table.insertRow();
+                    let cell = createTableCell(item);
+                    let removeItemButton = document.createElement("button");
+                    removeItemButton.textContent = "Remove";
+                    removeItemButton.setAttribute("idx", i);
+                    removeItemButton.addEventListener("click", function () {
+                        removeItemFromCart(this);
+                    });
+                    cell.appendChild(removeItemButton);
+                    row.appendChild(cell);
+                }
+                container.appendChild(table);
+            } else {
+                container.textContent = 'Your cart is empty.';
+            }
+        }
+
+        function removeItemFromCart(button) {
+            let url = sessionStorage.getItem('removeItemFromCartUrl') + `/${button.getAttribute("idx")}`;
+            sendGetRequest(url)
+                .then(data => {
+                    if (data.success) {
+                        loadCartItems();
+                        loadPriceLable();
+                    } else {
+                        alert("something went wrong, try again");
+                    }
+                }).catch(error => {
+                    console.error('Error occurred:', error);
+                });
+        }
+
+        function clearCart() {
+            sendGetRequest(sessionStorage.getItem('clearCartUrl'))
+                .then(data => {
+                    if (data.success) {
+                        loadCartItems();
+                        loadPriceLable();
+                    } else {
+                        alert("something went wrong, try again");
+                    }
+                }).catch(error => {
+                    console.error('Error occurred:', error);
+                });
+        }
+
+        function checkout() {
+            if (getCartItems().length !== 0) {
+                sendGetRequest(sessionStorage.getItem('checkoutUrl'))
+                    .then(data => {
+                        if (data.success) {
+                            clearCart();
+                            window.location.assign("confirmation.html");
+                        } else {
+                            alert(data.errMsg);
+                        }
+                    }).catch(error => {
+                        console.error('Error occurred:', error);
+                    });
+            } else {
+                alert("Empty cart")
+            }
+        }
+
+        window.onload = function () {
+            loadCartItems();
+            loadPriceLable();
+        };
+    </script>
+</body>
+
 </html>

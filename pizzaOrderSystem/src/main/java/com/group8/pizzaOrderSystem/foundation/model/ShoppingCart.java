@@ -1,9 +1,12 @@
 package com.group8.pizzaOrderSystem.foundation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ShoppingCart {
     private final List<PizzaDTO> items;
 

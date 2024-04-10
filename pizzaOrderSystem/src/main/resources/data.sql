@@ -1,8 +1,8 @@
-INSERT INTO Doughs (name, price) VALUES ('Brooklyn Style Crust', 0);
-INSERT INTO Doughs (name, price) VALUES ('Crunchy Thin Crust', 0);
-INSERT INTO Doughs (name, price) VALUES ('Hand Tossed Crust', 0);
-INSERT INTO Doughs (name, price) VALUES ('Gluten Free Crust', 0);
-INSERT INTO Doughs (name, price) VALUES ('Handmade Pan', 0);
+INSERT INTO Doughs (name, price) VALUES ('Brooklyn Style Crust', 5.00);
+INSERT INTO Doughs (name, price) VALUES ('Crunchy Thin Crust', 5.50);
+INSERT INTO Doughs (name, price) VALUES ('Hand Tossed Crust', 6.00);
+INSERT INTO Doughs (name, price) VALUES ('Gluten Free Crust', 5.80);
+INSERT INTO Doughs (name, price) VALUES ('Handmade Pan', 6.20);
 
 INSERT INTO DoughSizes (name, inch, multiplier) VALUES ('Small', 10, 1);
 INSERT INTO DoughSizes (name, inch, multiplier) VALUES ('Medium', 12, 1.2);

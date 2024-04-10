@@ -32,10 +32,6 @@ public class PizzaBuilderController {
     @GetMapping(value = "/pizzabuilder/options")
     public Map<String, Object> getOptions() {
         Map<String, Object> map = new HashMap<>();
-        map.put("domain", DOMAIN);
-        map.put("validateUrl", "/pizzabuilder/validate");
-        map.put("getPriceUrl", "/pizzabuilder/getprice");
-        map.put("shoppingCartUrl", "/cart");
         List<DoughDTO> doughList = doughService.list().stream().map(DoughMapper::toDTO).toList();
         List<CheeseDTO> cheeseList = cheeseService.list().stream().map(CheeseMapper::toDTO).toList();
         List<CheeseLevelDTO> cheeseLevelList = cheeseLevelService.list().stream().map(CheeseLevelMapper::toDTO).toList();

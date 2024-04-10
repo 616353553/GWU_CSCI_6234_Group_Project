@@ -1,68 +1,244 @@
 {
-    "customPizza": {
-        "pizzaBuilderOptionUrl": "/pizzabuilder/options"
-    },
-    "signaturePizza": [
+    "sauces": [
         {
-            "name": "ExtravaganZZa",
-            "doughName": "Brooklyn Style Crust",
-            "doughSizeName": "Large",
-            "cheeseName1": "Mozzarella Cheese",
-            "cheeseLevelName1": "Less",
-            "cheeseName2": "Mozzarella Cheese",
-            "cheeseLevelName2": "Less",
-            "sauceName": "Tomato Sauce",
-            "sauceIntensityName": "Normal",
-            "toppingName1": "Philly Steak",
-            "toppingName2": "Banana Peppers",
-            "toppingName3": "Mushrooms",
-            "retailPrice": 12.49
+            "name": "No Sauce"
         },
         {
-            "name": "MeatZZa",
-            "doughName": "Hand Tossed Crust",
-            "doughSizeName": "Large",
-            "cheeseName1": "Cheddar Cheese",
-            "cheeseLevelName1": "Normal",
-            "cheeseName2": "Cheddar Cheese",
-            "cheeseLevelName2": "Normal",
-            "sauceName": "Honey BBQ Sauce",
-            "sauceIntensityName": "Extra",
-            "toppingName1": "Ham",
-            "toppingName2": "Italian Sausage",
-            "toppingName3": "Premium Chicken",
-            "retailPrice": 18.99
+            "name": "Tomato Sauce"
         },
         {
-            "name": "Buffalo Chicken",
-            "doughName": "Handmade Pan",
-            "doughSizeName": "Large",
-            "cheeseName1": "Parmesan Cheese",
-            "cheeseLevelName1": "Normal",
-            "cheeseName2": "Gouda Cheese",
-            "cheeseLevelName2": "Normal",
-            "sauceName": "Alfredo Sauce",
-            "sauceIntensityName": "Normal",
-            "toppingName1": "Premium Chicken",
-            "toppingName2": "Jalapeno Peppers",
-            "toppingName3": "None",
-            "retailPrice": 15.99
+            "name": "Ranch"
         },
         {
-            "name": "SPINACH & FETA",
-            "doughName": "Gluten Free Crust",
-            "doughSizeName": "Large",
-            "cheeseName1": "Parmesan Cheese",
-            "cheeseLevelName1": "Normal",
-            "cheeseName2": "Gouda Cheese",
-            "cheeseLevelName2": "Normal",
-            "sauceName": "Alfredo Sauce",
-            "sauceIntensityName": "Normal",
-            "toppingName1": "Onions",
-            "toppingName2": "Spinach",
-            "toppingName3": "None",
-            "retailPrice": 10.99
+            "name": "Hearty Marinara Sauce"
+        },
+        {
+            "name": "Honey BBQ Sauce"
+        },
+        {
+            "name": "Garlic Parmesan Sauce"
+        },
+        {
+            "name": "Alfredo Sauce"
         }
     ],
-    "domain": "http://localhost:8080"
+    "cheeses": [
+        {
+            "name": "No Cheese"
+        },
+        {
+            "name": "Mozzarella Cheese"
+        },
+        {
+            "name": "Provolone Cheese"
+        },
+        {
+            "name": "Cheddar Cheese"
+        },
+        {
+            "name": "Parmesan Cheese"
+        },
+        {
+            "name": "Gouda Cheese"
+        },
+        {
+            "name": "Goat Cheese Cheese"
+        },
+        {
+            "name": "Gruyere Cheese"
+        },
+        {
+            "name": "Ricotta Cheese"
+        }
+    ],
+    "validateUrl": "/pizzabuilder/validate",
+    "domain": "http://localhost:8080",
+    "sauceIntensities": [
+        {
+            "name": "Less"
+        },
+        {
+            "name": "Normal"
+        },
+        {
+            "name": "Extra"
+        }
+    ],
+    "toppings": [
+        {
+            "name": "None",
+            "veggie": false
+        },
+        {
+            "name": "Ham",
+            "veggie": false
+        },
+        {
+            "name": "Beef",
+            "veggie": false
+        },
+        {
+            "name": "Salami",
+            "veggie": false
+        },
+        {
+            "name": "Pepperoni",
+            "veggie": false
+        },
+        {
+            "name": "Italian Sausage",
+            "veggie": false
+        },
+        {
+            "name": "Premium Chicken",
+            "veggie": false
+        },
+        {
+            "name": "Bacon",
+            "veggie": false
+        },
+        {
+            "name": "Philly Steak",
+            "veggie": false
+        },
+        {
+            "name": "Garlic",
+            "veggie": true
+        },
+        {
+            "name": "Jalapeno Peppers",
+            "veggie": true
+        },
+        {
+            "name": "Onions",
+            "veggie": true
+        },
+        {
+            "name": "Banana Peppers",
+            "veggie": true
+        },
+        {
+            "name": "Diced Tomatoes",
+            "veggie": true
+        },
+        {
+            "name": "Black Olives",
+            "veggie": true
+        },
+        {
+            "name": "Mushrooms",
+            "veggie": true
+        },
+        {
+            "name": "Pineapple",
+            "veggie": true
+        },
+        {
+            "name": "Green Peppers",
+            "veggie": true
+        },
+        {
+            "name": "Spinach",
+            "veggie": true
+        }
+    ],
+    "cheeseLevels": [
+        {
+            "name": "Less"
+        },
+        {
+            "name": "Normal"
+        },
+        {
+            "name": "Extra"
+        }
+    ],
+    "getPriceUrl": "/pizzabuilder/getprice",
+    "doughs": [
+        {
+            "name": "Brooklyn Style Crust",
+            "supportedDoughSizes": [
+                {
+                    "name": "Large",
+                    "inch": 14
+                },
+                {
+                    "name": "Medium",
+                    "inch": 12
+                },
+                {
+                    "name": "Small",
+                    "inch": 10
+                }
+            ]
+        },
+        {
+            "name": "Crunchy Thin Crust",
+            "supportedDoughSizes": [
+                {
+                    "name": "Large",
+                    "inch": 14
+                },
+                {
+                    "name": "Medium",
+                    "inch": 12
+                },
+                {
+                    "name": "Extra-Large",
+                    "inch": 16
+                },
+                {
+                    "name": "Small",
+                    "inch": 10
+                }
+            ]
+        },
+        {
+            "name": "Hand Tossed Crust",
+            "supportedDoughSizes": [
+                {
+                    "name": "Medium",
+                    "inch": 12
+                },
+                {
+                    "name": "Large",
+                    "inch": 14
+                },
+                {
+                    "name": "Extra-Large",
+                    "inch": 16
+                }
+            ]
+        },
+        {
+            "name": "Gluten Free Crust",
+            "supportedDoughSizes": [
+                {
+                    "name": "Medium",
+                    "inch": 12
+                },
+                {
+                    "name": "Large",
+                    "inch": 14
+                }
+            ]
+        },
+        {
+            "name": "Handmade Pan",
+            "supportedDoughSizes": [
+                {
+                    "name": "Small",
+                    "inch": 10
+                },
+                {
+                    "name": "Medium",
+                    "inch": 12
+                },
+                {
+                    "name": "Large",
+                    "inch": 14
+                }
+            ]
+        }
+    ]
 }

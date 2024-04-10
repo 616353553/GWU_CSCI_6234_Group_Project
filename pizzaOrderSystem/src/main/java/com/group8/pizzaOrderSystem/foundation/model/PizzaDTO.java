@@ -1,5 +1,7 @@
 package com.group8.pizzaOrderSystem.foundation.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.math.BigDecimal;
 
 public class PizzaDTO {
@@ -15,6 +17,7 @@ public class PizzaDTO {
     private String toppingName1;
     private String toppingName2;
     private String toppingName3;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private BigDecimal retailPrice;
 
     // standard constructors
@@ -115,7 +118,8 @@ public class PizzaDTO {
     @Override
     public String toString() {
         return String.format("[Pizza %s - $%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s]",
-                name, retailPrice.toString(), doughName, doughSizeName, cheeseName1, cheeseLevelName1, cheeseName2,
-                cheeseLevelName2, sauceName, sauceIntensityName, toppingName1, toppingName2, toppingName3);
+                name, (retailPrice != null ? retailPrice.toString() : BigDecimal.ZERO.toString()), doughName,
+                doughSizeName, cheeseName1, cheeseLevelName1, cheeseName2, cheeseLevelName2, sauceName,
+                sauceIntensityName, toppingName1, toppingName2, toppingName3);
     }
 }
